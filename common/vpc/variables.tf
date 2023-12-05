@@ -31,19 +31,25 @@ variable "azs" {
 variable "private_subnet_suffix" {
   description = "Suffix to append to private subnets name"
   type        = string
-  default     = "private-"
+  default     = "private"
 }
 
 variable "public_subnet_suffix" {
   description = "Suffix to append to public subnets name"
   type        = string
-  default     = "public-"
+  default     = "public"
 }
 
 variable "database_subnet_suffix" {
   description = "Suffix to append to database subnets name"
   type        = string
-  default     = "rds-"
+  default     = "rds"
+}
+
+variable "elasticache_subnet_suffix" {
+  description = "Suffix to append to elasticache subnets name"
+  type        = string
+  default     = "elasticache"
 }
 
 variable "additional_tags" {

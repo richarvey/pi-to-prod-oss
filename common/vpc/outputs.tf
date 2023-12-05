@@ -35,6 +35,11 @@ output "database_subnet_group_name" {
   value       = module.vpc.database_subnet_group_name
 }
 
+output "elasticache_subnet_group_name" {
+  description = "Name of database subnet group"
+  value       = module.vpc.database_subnet_group_name
+}
+
 # Route Tables
 
 output "default_route_table_id" {
@@ -57,6 +62,11 @@ output "database_route_table_ids" {
   value       = module.vpc.database_route_table_ids
 }
 
+output "elasticache_route_table_ids" {
+  description = "List of IDs of database route tables"
+  value       = module.vpc.database_route_table_ids
+}
+
 # IPv6 Information
 
 output "vpc_ipv6_association_id" {
@@ -75,6 +85,11 @@ output "private_subnets_ipv6_cidr_blocks" {
 }
 
 output "public_subnets_ipv6_cidr_blocks" {
+  description = "List of IPv6 cidr_blocks of public subnets in an IPv6 enabled VPC"
+  value       = module.vpc.public_subnets_ipv6_cidr_blocks
+}
+
+output "elasticache_subnets_ipv6_cidr_blocks" {
   description = "List of IPv6 cidr_blocks of public subnets in an IPv6 enabled VPC"
   value       = module.vpc.public_subnets_ipv6_cidr_blocks
 }

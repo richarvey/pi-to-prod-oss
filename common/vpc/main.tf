@@ -21,14 +21,18 @@ module "vpc" {
   public_subnets   = [for k, v in local.azs : cidrsubnet(local.vpc_cidr, 8, k)]
   private_subnets  = [for k, v in local.azs : cidrsubnet(local.vpc_cidr, 8, k + 4)]
   database_subnets = [for k, v in local.azs : cidrsubnet(local.vpc_cidr, 8, k + 8)]
+  elasticache_subnets = [for k, v in local.azs : cidrsubnet(local.vpc_cidr, 8, k + 12)]
 
   public_subnet_tags = { "name": "${var.public_subnet_suffix}-${var.name}-${var.environment}" }
   private_subnet_tags = { "name": "${var.private_subnet_suffix}-${var.name}-${var.environment}" }
   database_subnet_tags = { "name": "${var.database_subnet_suffix}-${var.name}-${var.environment}" }
+  elasticache_subnet_tags = { "name": "${var.elasticache_subnet_suffix}-${var.name}-${var.environment}" }
 
   create_database_subnet_group = true
   create_database_subnet_route_table     = true
   create_database_internet_gateway_route = false
+
+  create_elasticache_subnet_route_table = true
 
   enable_nat_gateway = true
   single_nat_gateway = var.single_nat_gateway
@@ -53,6 +57,7 @@ module "vpc" {
   public_subnet_ipv6_prefixes   = [0, 1, 2]
   private_subnet_ipv6_prefixes  = [3, 4, 5]
   database_subnet_ipv6_prefixes = [6, 7, 8]
+  elasticache_subnet_ipv6_prefixes = [9, 10, 11]
 
   tags = local.default_tags
 
