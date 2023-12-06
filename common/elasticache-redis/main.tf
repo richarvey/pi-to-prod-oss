@@ -42,15 +42,26 @@ module "security_group" {
   description = "Redis example security group"
   vpc_id      = data.terraform_remote_state.vpc.outputs.vpc_id
 
+  use_name_prefix = false
+
   # ingress
+  ingress_ipv6_cidr_blocks = data.terraform_remote_state.vpc.outputs.private_subnets_ipv6_cidr_blocks
+  ingress_with_ipv6_cidr_blocks = [
+	{
+    	from_port   = 6379
+    	to_port     = 6379
+    	protocol    = "tcp"
+    	description = "Redis access from within VPC"
+	}
+  ]
+  ingress_cidr_blocks = data.terraform_remote_state.vpc.outputs.private_subnets_cidr_blocks
   ingress_with_cidr_blocks = [
-    {
-      from_port   = 6379
-      to_port     = 6379
-      protocol    = "tcp"
-      description = "Redis access from within VPC"
-      cidr_blocks = data.terraform_remote_state.vpc.outputs.vpc_cidr_block
-    },
+	{
+    	from_port   = 6379
+    	to_port     = 6379
+    	protocol    = "tcp"
+    	description = "Redis access from within VPC"
+	}
   ]
 
   tags = local.default_tags

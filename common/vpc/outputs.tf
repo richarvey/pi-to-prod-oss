@@ -52,9 +52,19 @@ output "public_route_table_ids" {
   value       = module.vpc.public_route_table_ids
 }
 
+output "public_subnets_cidr_blocks" {
+  description = "List of IPv4 cidr_blocks of public subnets"
+  value       = module.vpc.public_subnets_cidr_blocks
+}
+
 output "private_route_table_ids" {
   description = "List of IDs of private route tables"
   value       = module.vpc.private_route_table_ids
+}
+
+output "private_subnets_cidr_blocks" {
+  description = "List of IPv4 cidr_blocks of private subnets"
+  value       = module.vpc.private_subnets_cidr_blocks
 }
 
 output "database_route_table_ids" {
@@ -62,9 +72,19 @@ output "database_route_table_ids" {
   value       = module.vpc.database_route_table_ids
 }
 
+output "database_subnets_cidr_blocks" {
+  description = "List of IPv4 cidr_blocks of database subnets"
+  value       = module.vpc.database_subnets_cidr_blocks
+}
+
 output "elasticache_route_table_ids" {
   description = "List of IDs of database route tables"
   value       = module.vpc.database_route_table_ids
+}
+
+output "elasticache_subnets_cidr_blocks" {
+  description = "List of IPv4 cidr_blocks of elasticache subnets"
+  value       = module.vpc.elasticache_subnets_cidr_blocks
 }
 
 # IPv6 Information

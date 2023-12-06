@@ -88,14 +88,24 @@ module "security_group" {
   vpc_id      = data.terraform_remote_state.vpc.outputs.vpc_id
 
   # ingress
+  # ingress
+  ingress_ipv6_cidr_blocks = data.terraform_remote_state.vpc.outputs.private_subnets_ipv6_cidr_blocks
+  ingress_with_ipv6_cidr_blocks = [
+	{
+    	from_port   = 3306
+    	to_port     = 3306
+    	protocol    = "tcp"
+    	description = "MySQL access from within VPC"
+	}
+  ]
+  ingress_cidr_blocks = data.terraform_remote_state.vpc.outputs.private_subnets_cidr_blocks
   ingress_with_cidr_blocks = [
-    {
-      from_port   = 3306
-      to_port     = 3306
-      protocol    = "tcp"
-      description = "MySQL access from within VPC"
-      cidr_blocks = data.terraform_remote_state.vpc.outputs.vpc_cidr_block
-    },
+	{
+    	from_port   = 3306
+    	to_port     = 3306
+    	protocol    = "tcp"
+    	description = "MySQL access from within VPC"
+	}
   ]
 
   tags = local.default_tags
