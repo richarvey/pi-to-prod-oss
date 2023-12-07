@@ -19,12 +19,14 @@ resource "aws_opensearch_domain" "sqcows-opensearch" {
 
   cluster_config {
     instance_type          = "m6g.large.search"
-    zone_awareness_enabled = true
+    instance_count = 2
+	zone_awareness_enabled = true
   }
   advanced_security_options {
     enabled                        = true
-    anonymous_auth_enabled         = true
     internal_user_database_enabled = true
+	anonymous_auth_enabled = false
+
     master_user_options {
       master_user_name     = "root"
       master_user_password = "ChangeMe1!"
@@ -46,10 +48,10 @@ resource "aws_opensearch_domain" "sqcows-opensearch" {
     volume_size = 10
   }
   vpc_options {
+
     subnet_ids = [
-      data.terraform_remote_state.vpc.outputs.private_subnets_cidr_blocks[0],
-      data.terraform_remote_state.vpc.outputs.private_subnets_cidr_blocks[1],
-	  data.terraform_remote_state.vpc.outputs.private_subnets_cidr_blocks[2],
+      data.terraform_remote_state.vpc.outputs.private_subnets[0],
+      data.terraform_remote_state.vpc.outputs.private_subnets[1],
     ]
 
     security_group_ids = [module.security_group.security_group_id]
