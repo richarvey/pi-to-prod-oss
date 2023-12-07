@@ -81,16 +81,6 @@ module "security_group" {
   vpc_id      = data.terraform_remote_state.vpc.outputs.vpc_id
 
   # ingress
-  # ingress
-  ingress_ipv6_cidr_blocks = data.terraform_remote_state.vpc.outputs.private_subnets_ipv6_cidr_blocks
-  ingress_with_ipv6_cidr_blocks = [
-	{
-    	from_port   = 443
-    	to_port     = 443
-    	protocol    = "tcp"
-    	description = "OpenSearch access from within VPC"
-	}
-  ]
   ingress_cidr_blocks = data.terraform_remote_state.vpc.outputs.private_subnets_cidr_blocks
   ingress_with_cidr_blocks = [
 	{
