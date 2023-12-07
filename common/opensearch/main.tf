@@ -14,7 +14,7 @@ data "terraform_remote_state" vpc {
 data "aws_caller_identity" "current" {}
 
 resource "aws_opensearch_domain" "sqcows-opensearch" {
-  domain_name    = var.domain
+  domain_name    = var.domain_name
   engine_version = "OpenSearch_2.11"
 
   cluster_config {
@@ -62,7 +62,7 @@ resource "aws_opensearch_domain" "sqcows-opensearch" {
   access_policies = data.aws_iam_policy_document.sqcows-opensearch.json
 
   tags = {
-    Domain = "${var.domain}"
+    Domain = "${var.domain_name}"
   }
 
   depends_on = [aws_iam_service_linked_role.sqcows-opensearch]
@@ -117,6 +117,6 @@ data "aws_iam_policy_document" "sqcows-opensearch" {
     }
 
     actions   = ["es:*"]
-    resources = ["arn:aws:es:${var.region}:${data.aws_caller_identity.current.account_id}:domain/${var.domain}/*"]
+    resources = ["arn:aws:es:${var.region}:${data.aws_caller_identity.current.account_id}:domain/${var.domain_name}/*"]
   }
 }
