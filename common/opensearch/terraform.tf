@@ -3,8 +3,8 @@ terraform {
   backend "s3" {
     region         = "eu-west-1"
     bucket         = "sqcows-terraform-bucket"
-    key            = "rds-mysql-state.tfstate"
-    dynamodb_table = "sqcows-rds-mysql-state"
+    key            = "opensearch-state.tfstate"
+    dynamodb_table = "sqcows-opensearch-state"
     encrypt        = true
   }
 }

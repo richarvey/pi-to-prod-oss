@@ -1,7 +1,7 @@
 variable "name" {
   description = "Solution name"
   type        = string
-  default     = "simple-vpc"
+  default     = "example-opensearch"
 }
 
 variable "environment" {
@@ -26,4 +26,10 @@ variable additional_tags {
   description = "Additional tags"
   type        = map(string)
   default     = {}
+}
+
+variable domain_name {
+  description = "Domain name"
+  type        = string
+  default     = "sqcows-opensearch"
 }

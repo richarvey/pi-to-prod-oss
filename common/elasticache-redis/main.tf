@@ -11,13 +11,11 @@ data "terraform_remote_state" vpc {
 	}
 }
 
-resource "aws_elasticache_replication_group" "example" {
+resource "aws_elasticache_replication_group" "redis_cache" {
   replication_group_id = "${var.name}-${var.environment}-redis"
   description = "Redis cluster for projects"
   engine               = "redis"
   node_type            = "cache.t4g.micro"
-  num_node_groups     = 2
-  replicas_per_node_group = 1
   automatic_failover_enabled = true
   parameter_group_name = "default.redis7.cluster.on"
   engine_version       = "7.1"
@@ -28,7 +26,11 @@ resource "aws_elasticache_replication_group" "example" {
   maintenance_window         = "tue:06:30-tue:07:30"
   snapshot_window            = "01:00-02:00"
   port                 = 6379
+
+  replicas_per_node_group = 1
+  num_node_groups         = 2
 }
+
 
 ################################################################################
 # Supporting Resources
